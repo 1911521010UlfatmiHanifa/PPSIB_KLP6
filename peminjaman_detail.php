@@ -21,18 +21,31 @@
 
     if(isset($_POST['dikembalikan'])){
 
-        $status_peminjaman = "Sudah Dikembalikan";
-        $stmt=$conn->prepare("UPDATE peminjaman set status_peminjaman=? where id_peminjaman=?");
-        $stmt->bind_param('si', $status_peminjaman, $id_peminjaman);
-        $stmt->execute();
-    
-        if($conn->affected_rows > 0){
-            $pesan_sukses= "Data pengembalian peminjaman berhasil disimpan!";
+        $status_peminjaman2 = "Sudah Dikembalikan";
+        if(!$hasil = $conn->query("SELECT * FROM peminjaman join user on user.id_user=peminjaman.id_user join instansi on
+                                user.id_instansi=instansi.id_instansi where id_peminjaman='$id_peminjaman'")){
+            die("gagal meminta data");
         }
-        else{
-            $pesan_gagal= "Data pengembalian peminjaman konfirmasi harga gagal disimpan!";
+        while($data = $hasil->fetch_assoc()){
+            $tanggal_kembali = $data['tanggal_kembali'];
         }
-        $stmt->close();
+        $tanggal_pengajuan = date('Y/m/d');
+        if($tanggal_kembali < $tanggal_pengajuan){
+            $stmt=$conn->query("UPDATE peminjaman set status_peminjaman='$status_peminjaman2' where id_peminjaman='$id_peminjaman'");
+            $pesan_peringatan = "Data Berhasil Disimpan dan Peminjam Dikenakan Denda";
+        }else{
+            $stmt=$conn->prepare("UPDATE peminjaman set status_peminjaman=? where id_peminjaman=?");
+            $stmt->bind_param('si', $status_peminjaman, $id_peminjaman);
+            $stmt->execute();
+        
+            if($conn->affected_rows > 0){
+                $pesan_sukses= "Data pengembalian peminjaman berhasil disimpan!";
+            }
+            else{
+                $pesan_gagal= "Data pengembalian peminjaman konfirmasi harga gagal disimpan!";
+            }
+            $stmt->close();
+        }
         
     }
     
@@ -162,10 +175,10 @@
                 </div>
             <?php
             }
-            else if(isset($pesan_gagal)){
+            else if(isset($pesan_peringatan)){
             ?>
-                <div class="alert alert-danger" role="alert">
-                <?php echo '<img src="logo/cross.png" width="18" class="me-2">'.$pesan_gagal; ?>
+                <div class="alert alert-warning" role="alert">
+                <?php echo '<img src="logo/warning.png" width="18" class="me-2">'.$pesan_peringatan; ?>
                 </div>
             <?php
             }
