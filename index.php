@@ -129,7 +129,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Unit Kegiatan Mahasiswa Universitas Andalas</h2>
+          <h2>Unit Kegiatan Seni Universitas Andalas</h2>
           <p>Unit Kegiatan Seni (UKS) merupakan salah satu organisasi mahasiswa intra kampus yang berkaitan dengan bidang seni di 
             tingkat Universitas. UKS berdiri pada tahun 1990 yang dipelopori oleh kelompok paduan suara dengan nama UKM Kesenian.
             UKS Unand memiliki 6 divisi yaitu divisi administrasi, divisi keuangan, divisi humas, divisi SDM, divisi pemasaran 
