@@ -101,8 +101,6 @@
               src="assets2/img/gallery/gambar5.jpeg" alt=""></a>
           <a href="assets2/img/gallery/gambar6.jpeg" class="venobox" data-gall="gallery-carousel"><img
               src="assets2/img/gallery/gambar6.jpeg" alt=""></a>
-          <a href="assets2/img/gallery/gambar7.png" class="venobox" data-gall="gallery-carousel"><img
-              src="assets2/img/gallery/gambar7.png" alt=""></a>
           <a href="assets2/img/gallery/gambar8.jpeg" class="venobox" data-gall="gallery-carousel"><img
               src="assets2/img/gallery/gambar8.jpeg" alt=""></a>
           <a href="assets2/img/gallery/gambar9.jpeg" class="venobox" data-gall="gallery-carousel"><img
