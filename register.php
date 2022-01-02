@@ -221,7 +221,7 @@
 						</div>
 
 						<div class="col-6">
-						<a class="btn btn-warning w-100" href="halaman_utama.html">Back</a>
+						<a class="btn btn-warning w-100" href="index.php">Back</a>
 						</div>
 						<div class="col-6">
 							<button class="btn btn-primary w-100" type="submit" name="simpan">Create Account</button>

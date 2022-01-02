@@ -2,19 +2,6 @@
     include "session.php";
     $id_inventaris = $_REQUEST['id_inventaris'];
 
-    $stmt = $conn->prepare("SELECT * FROM inventaris WHERE id_inventaris = ?");
-    $stmt->bind_param("s", $id_inventaris);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    while($data = $result->fetch_assoc()){
-        $nama_inventaris = $data['nama_inventaris'];
-        $harga_mahasiswa= $data['harga_mahasiswa'];
-		$harga_nonmahasiswa = $data['harga_nonmahasiswa'];
-		$keterangan = $data['keterangan'];
-        $gambar2 = $data['gambar'];
-    }
-
     if(isset($_POST['simpan'])){
 		$nama_inventaris = $_POST['nama_inventaris'];
 		$harga_mahasiswa= $_POST['harga_mahasiswa'];
@@ -27,8 +14,8 @@
 		$error = $_FILES['gambar']['error'];
 		
 		if ($error === 4) {
-			$stmt=$conn->prepare('UPDATE inventaris SET nama_inventaris=?, harga_mahasiswa=?, harga_nonmahasiswa=?, gambar=?, keterangan=? where id_inventaris=?');
-			$stmt->bind_param("siissi", $nama_inventaris, $harga_mahasiswa, $harga_nonmahasiswa, $gambar, $keterangan,  $id_inventaris);
+			$stmt=$conn->prepare('UPDATE inventaris SET nama_inventaris=?, harga_mahasiswa=?, harga_nonmahasiswa=?, keterangan=? where id_inventaris=?');
+			$stmt->bind_param("siisi", $nama_inventaris, $harga_mahasiswa, $harga_nonmahasiswa, $keterangan,  $id_inventaris);
 			$stmt->execute();
 
 			if($conn->affected_rows > 0){
@@ -63,6 +50,19 @@
             $pesan_gagal= "Format File Tidak Sesuai!";
         }
 	} 
+
+    $stmt = $conn->prepare("SELECT * FROM inventaris WHERE id_inventaris = ?");
+    $stmt->bind_param("s", $id_inventaris);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while($data = $result->fetch_assoc()){
+        $nama_inventaris = $data['nama_inventaris'];
+        $harga_mahasiswa= $data['harga_mahasiswa'];
+		$harga_nonmahasiswa = $data['harga_nonmahasiswa'];
+		$keterangan = $data['keterangan'];
+        $gambar2 = $data['gambar'];
+    }
     $conn->close();
 ?>
 <!DOCTYPE html>

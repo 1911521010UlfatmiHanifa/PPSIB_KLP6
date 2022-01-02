@@ -6,10 +6,10 @@
   }
 
   while($data = $hasila->fetch_assoc()){
-    $nama_lengkap = $data['nama_lengkap'];
-    $username = $data['username'];
-    $gambar = $data['foto'];
-    $jenis_user = $data['jenis_user'];
+    $nama_lengkap5 = $data['nama_lengkap'];
+    $username5 = $data['username'];
+    $gambar5 = $data['foto'];
+    $jenis_user5 = $data['jenis_user'];
 }
 
 ?>
@@ -30,13 +30,13 @@
 
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
         <img src="img/<?php echo $_SESSION['foto']?>" alt="Profile" class="rounded-circle">
-        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $nama_lengkap ?></span>
+        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $nama_lengkap5 ?></span>
       </a><!-- End Profile Iamge Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li class="dropdown-header">
-          <h6><?php echo $nama_lengkap ?></h6>
-          <span>Role : <?php echo $jenis_user;?></span>
+          <h6><?php echo $nama_lengkap5 ?></h6>
+          <span>Role : <?php echo $jenis_user5;?></span>
         </li>
         <li>
           <hr class="dropdown-divider">

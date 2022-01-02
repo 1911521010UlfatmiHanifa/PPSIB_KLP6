@@ -109,7 +109,7 @@
 	<?php 
 		if ($_SESSION['jenis_user'] == "Admin"){ 
 		include("sidebar_admin.php");
-		}else if($_SESSION['jenis_user'] == "Divisi Pemasaran"){
+		}else if($_SESSION['jenis_user'] == "Divisi Rumah Tangga"){
 		include("sidebar_divisi_rumah_tangga.php");
 		}else if($_SESSION['jenis_user'] == "Divisi Pemasaran"){
 		include("sidebar_divisi_pemasaran.php");

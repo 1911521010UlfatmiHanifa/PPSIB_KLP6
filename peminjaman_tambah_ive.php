@@ -120,7 +120,7 @@
                 <form class="row g-3 needs-validation" method="post" novalidate enctype="multipart/form-data">
 
 						<div class="col-12">
-							<label for="id_inventaris" class="form-label">Tanggal Pinjam</label>
+							<label for="id_inventaris" class="form-label">Nama Inventaris</label>
 							<select class="form-select" id="id_inventaris" name="id_inventaris" required>
 								<option selected disabled value="">Pilih inventaris</option>
 								<?php 

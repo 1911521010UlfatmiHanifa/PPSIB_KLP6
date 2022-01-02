@@ -1,5 +1,6 @@
 <?php
     include "session.php";
+    $id = $_SESSION['id_user'];
 
     if(isset($_POST['delete'])){
         if(isset($_POST['aksi']) && $_POST['aksi'] == 'hapus'){
@@ -19,7 +20,7 @@
         }
     }
 
-    if(!$hasil = $conn->query("SELECT * FROM user join instansi on user.id_instansi=instansi.id_instansi order by id_user")){
+    if(!$hasil = $conn->query("SELECT * FROM user join instansi on user.id_instansi=instansi.id_instansi where id_user not in (Select id_user from user where id_user='$id') order by id_user")){
         die("gagal meminta data");
     }
     $no = 1;

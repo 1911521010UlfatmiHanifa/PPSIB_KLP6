@@ -2,31 +2,14 @@
     include "session.php";
     $id_user = $_REQUEST['id_user'];
 
-    $stmt = $conn->prepare("SELECT * FROM user join instansi on user.id_instansi=instansi.id_instansi WHERE id_user = ?");
-    $stmt->bind_param("s", $id_user);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    while($data = $result->fetch_assoc()){
-        $nama_lengkap= $data['nama_lengkap'];
-        $username= $data['username'];
-        $tanggal_lahir = $data['tanggal_lahir'];
-        $no_hp = $data['no_hp'];
-        $alamat = $data['alamat'];
-        $jenis_kelamin = $data['jenis_kelamin'];
-        $id_instansi = $data['id_instansi'];
-        $jenis_user = $data['jenis_user'];
-        $gambar2 = $data['foto'];
-    }
-
     if(isset($_POST['simpan'])){
-		$nama_lengkap= $_POST['nama_lengkap'];
-        $username= $_POST['username'];
-        $no_hp = $_POST['no_hp'];
-        $alamat = $_POST['alamat'];
-        $jenis_kelamin = $_POST['jenis_kelamin'];
-        $id_instansi = $_POST['id_instansi'];
-        $jenis_user = $_POST['jenis_user'];
+		$nama_lengkap1= $_POST['nama_lengkap'];
+        $username1= $_POST['username'];
+        $no_hp1 = $_POST['no_hp'];
+        $alamat1 = $_POST['alamat'];
+        $jenis_kelamin1 = $_POST['jenis_kelamin'];
+        $id_instansi1 = $_POST['id_instansi'];
+        $jenis_user1 = $_POST['jenis_user'];
         $tanggal_lahir1 = $_POST['tanggal_lahir'];
 
 		$namaFile = $_FILES['gambar']['name'];
@@ -43,8 +26,8 @@
             if ($error === 4) {
                 $stmt=$conn->prepare('UPDATE user SET nama_lengkap=?, username=?, tanggal_lahir=?, no_hp=?, alamat=?,
                                     jenis_kelamin=?, id_instansi=?, jenis_user=? where id_user=?');
-                $stmt->bind_param("ssssssisi", $nama_lengkap, $username, $tanggal_lahir1, $no_hp, $alamat, $jenis_kelamin,
-                                    $id_instansi, $jenis_user, $id_user);
+                $stmt->bind_param("ssssssisi", $nama_lengkap1, $username1, $tanggal_lahir1, $no_hp1, $alamat1, $jenis_kelamin1,
+                                    $id_instansi1, $jenis_user1, $id_user);
                 $stmt->execute();
 
                 if($conn->affected_rows > 0){
@@ -63,8 +46,8 @@
                         move_uploaded_file($tmpName, 'img/' . $namaFile);
                         $stmt=$conn->prepare('UPDATE user SET nama_lengkap=?, username=?, tanggal_lahir=?, no_hp=?, alamat=?,
                                         jenis_kelamin=?, id_instansi=?, jenis_user=?, foto=? where id_user=?');
-                        $stmt->bind_param("ssssssissi", $nama_lengkap, $username, $tanggal_lahir1, $no_hp, $alamat, $jenis_kelamin,
-                                            $id_instansi, $jenis_user, $namaFile, $id_user);
+                        $stmt->bind_param("ssssssissi", $nama_lengkap1, $username1, $tanggal_lahir1, $no_hp1, $alamat1, $jenis_kelamin1,
+                                            $id_instansi1, $jenis_user1, $namaFile, $id_user);
                         $stmt->execute();
 
                         if($conn->affected_rows > 0){
@@ -83,6 +66,23 @@
             $pesan_gagal= "Umur belum mencukupi!";
         }
 	} 
+
+    $stmt = $conn->prepare("SELECT * FROM user join instansi on user.id_instansi=instansi.id_instansi WHERE id_user = ?");
+    $stmt->bind_param("i", $id_user);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while($data = $result->fetch_assoc()){
+        $nama_lengkap= $data['nama_lengkap'];
+        $username= $data['username'];
+        $tanggal_lahir = $data['tanggal_lahir'];
+        $no_hp = $data['no_hp'];
+        $alamat = $data['alamat'];
+        $jenis_kelamin = $data['jenis_kelamin'];
+        $id_instansi = $data['id_instansi'];
+        $jenis_user = $data['jenis_user'];
+        $gambar2 = $data['foto'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,7 +125,7 @@
 
 <body>
 
-    <?php include("header.php");?>
+<?php include("header.php");?>
 
     <?php include("sidebar_admin.php");?>  
 
@@ -242,7 +242,7 @@
                                     if($jenis_user =="Divisi Pemasaran") {
                                         echo"<option value='Divisi Pemasaran' selected>Divisi Pemasaran</option>";
                                     }else {
-                                        echo "<option value='Divisi Pemasaran'</option>";
+                                        echo "<option value='Divisi Pemasaran''>Divisi Pemasaran</option>";
                                     }
 
                                     if($jenis_user =="Pengurus UKS") {
